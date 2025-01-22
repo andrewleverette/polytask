@@ -28,12 +28,16 @@ projects/**/pom.xml
 
 # nrepl
 .nrepl-port
+.rebel_readline_history
 
 # clojure-lsp
-.lsp/.cache
+**/.lsp/.cache/**
 
 # clj-kondo
-.clj-kondo/.cache
+**/.clj-kondo/.cache
 
 # Calva VS Code Extension
 .calva/output-window/output.calva-repl
+
+# Config files
+**/*.env.edn
