@@ -1,10 +1,10 @@
 (ns polytask.database.interface
-  (:import java.util.UUID))
+  (:require [polytask.database.in-memory-database.core :as core]))
 
 (defn insert!
   "Inserts an entity into the database"
   [db table entity]
-  (let [id (str (UUID/randomUUID))
+  (let [id (core/generate-UUID)
         new-entity (assoc entity :id id)]
     (swap! (:state db) assoc-in [table id] new-entity)
     new-entity))
