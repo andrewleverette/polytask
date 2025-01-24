@@ -12,7 +12,7 @@
 (defn find-unique
   "Returns a unique entity in the database by id"
   [db table id]
-  (get-in (:state db) [table id]))
+  (get-in @(:state db) [table id]))
 
 (defn find-many
   "Returns all entities in the database.
