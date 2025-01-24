@@ -2,7 +2,9 @@
                                 "components/config/resources"]
 
                   :extra-deps {org.clojure/clojure {:mvn/version "1.11.1"}
-                               poly/config {:local/root "components/config"}}}
+                               integrant/integrant {:mvn/version "0.13.1"}
+                               poly/config {:local/root "components/config"}
+                               poly/in-memory-database {:local/root "components/in_memory_database"}}}
 
             :test {:extra-paths []}
 
