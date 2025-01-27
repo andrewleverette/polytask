@@ -5,7 +5,8 @@
                                integrant/integrant {:mvn/version "0.13.1"}
                                poly/config {:local/root "components/config"}
                                poly/in-memory-database {:local/root "components/in_memory_database"}
-                               poly/in-memory-task-repository {:local/root "components/in_memory_task_repository"}}}
+                               poly/in-memory-task-repository {:local/root "components/in_memory_task_repository"}
+                               poly/base {:local/root "bases/api"}}}
 
             :test {:extra-paths []}
 

@@ -2,17 +2,18 @@
   (:require [integrant.core :as ig]))
 
 (defmethod ig/init-key :polytask.db/in-memory [_ _]
+  (println "Starting in-memory database")
   {:state (atom {})})
 
 (defmethod ig/halt-key! :polytask.db/in-memory [_ db]
   (reset! (:state db) nil))
 
-(defn timestamp
+(defn- timestamp
   "Returns the current timestamp"
   []
   (java.time.Instant/now))
 
-(defn generate-UUID
+(defn- generate-UUID
   "Generates a UUID as a string"
   []
   (str (java.util.UUID/randomUUID)))
