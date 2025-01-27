@@ -1,7 +1,7 @@
 (ns polytask.config.core
   (:require
-   [clojure.edn :as edn]
-   [clojure.java.io :as io]))
+   [clojure.java.io :as io]
+   [integrant.core :as ig]))
 
 (defn- get-env
   "Returns the current environment with a default of :local
@@ -17,7 +17,7 @@
 (defn- parse-env-file
   "Given a file, return the parse contents of the config file."
   [file]
-  (let [content (->> file slurp edn/read-string)]
+  (let [content (->> file slurp ig/read-string)]
     (if (map? content)
       content
       {})))
@@ -30,7 +30,9 @@
     (when-let [file (io/resource config-file)]
       (try
         (parse-env-file file)
-        (catch Exception _
+        (catch Exception err
+          (println "Unable to load config file: " config-file)
+          (println "Error: " (ex-message err))
           {})))))
 
 (defn- fetch-from-secrets-manager
@@ -55,10 +57,9 @@
   return the value at the key path"
   ([config ks] (get-config config ks nil))
   ([config ks default]
-   (let [keys (if (sequential? ks) ks [ks])]
-     (get-in config keys default))))
+   (let [s (if (sequential? ks) ks [ks])]
+     (get-in config s default))))
 
 (def config
   "The polytask configuration map."
   (load-config))
-

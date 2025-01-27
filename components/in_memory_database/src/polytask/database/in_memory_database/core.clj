@@ -1,9 +1,9 @@
 (ns polytask.database.in-memory-database.core
   (:require [integrant.core :as ig]))
 
-(defmethod ig/init-key :polytask.db/in-memory [_ _]
+(defmethod ig/init-key :polytask.db/in-memory [_ state]
   (println "Starting in-memory database")
-  {:state (atom {})})
+  {:state (atom state)})
 
 (defmethod ig/halt-key! :polytask.db/in-memory [_ db]
   (reset! (:state db) nil))

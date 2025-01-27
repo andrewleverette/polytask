@@ -4,6 +4,7 @@
             [reitit.ring :as ring]
             [reitit.ring.middleware.muuntaja :as muuntaja]
             [ring.adapter.jetty :as jetty]
+            [polytask.config.interface :as c]
             [polytask.task-repository.interface :as task-repo]))
 
 (defn routes [{:keys [db]}]
@@ -46,18 +47,19 @@
     {:data {:muuntaja m/instance
             :middleware [muuntaja/format-middleware]}})))
 
-(defn- start-server [context]
-  (jetty/run-jetty (routes context) {:port 3000 :join? false}))
+(defn- start-server [deps]
+  (let [config (c/get-config :server)]
+    (jetty/run-jetty (routes deps) config)))
 
 (defn- stop-server [server]
   (.stop server))
 
-(defmethod ig/init-key :task-api/server [_ {:keys [db]}]
+(defmethod ig/init-key :polytask.api/ring [_ context]
   (println "Starting server on port 3000")
-  (let [server (start-server {:db db})]
+  (let [server (start-server context)]
     {:server server}))
 
-(defmethod ig/halt-key! :task-api/server [_ {:keys [server]}]
+(defmethod ig/halt-key! :polytask.api/ring [_ {:keys [server]}]
   (when server
     (println "Stopping server")
     (stop-server server)))

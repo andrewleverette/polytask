@@ -1,11 +1,10 @@
 (ns development.core
   (:require
-   [integrant.core :as ig]))
+   [integrant.core :as ig]
+   [polytask.config.interface :as c]))
 
 (comment
-  (def config
-    {:polytask.db/in-memory nil
-     :task-api/server {:db (ig/ref :polytask.db/in-memory)}})
+  (def config (c/get-config :polytask.api/system))
 
   (def system (ig/init config))
   system
