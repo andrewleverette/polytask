@@ -1,4 +1,5 @@
 (ns polytask.api.core
+  (:gen-class)
   (:require [integrant.core :as ig]
             [muuntaja.core :as m]
             [reitit.ring :as ring]
@@ -74,3 +75,12 @@
 (defmethod ig/halt-key! :polytask.api/ring [_ {:keys [server]}]
   (when server
     (stop-server server)))
+
+(defn -main
+  []
+  (let [config (c/get-config :polytask.api/system)]
+    (if (map? config)
+      (ig/init config)
+      (do
+        (l/error "Failed to load config" {:config config})
+        (System/exit 1)))))

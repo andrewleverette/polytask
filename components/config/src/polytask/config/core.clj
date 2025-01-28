@@ -3,6 +3,12 @@
    [clojure.java.io :as io]
    [integrant.core :as ig]))
 
+(def default-config
+  "{:environment :local
+     :server {:port 3000 :join? false}
+     :polytask.api/system {:polytask.db/in-memory {}
+                           :polytask.api/ring {:db #ig/ref :polytask.db/in-memory}}}")
+
 (defn- get-env
   "Returns the current environment with a default of :local
   if the POLYTASK_ENV environment variable is not set."
@@ -26,14 +32,11 @@
   "Given an environment keyword, return a map of the environment file contents
   stored in an edn file."
   [env]
-  (let [config-file (str "./config/" (name env) ".env.edn")]
-    (when-let [file (io/resource config-file)]
-      (try
-        (parse-env-file file)
-        (catch Exception err
-          (println "Unable to load config file: " config-file)
-          (println "Error: " (ex-message err))
-          {})))))
+  (let [config-file (str "./config/" (name env) ".env.edn")
+        file (io/resource config-file)]
+    (if file
+      (parse-env-file file)
+      (throw (ex-info (str "Could not find config file: " config-file) {})))))
 
 (defn- fetch-from-secrets-manager
   "Fetches secrets from AWS Secrets Manager or HashiCorp Vault.
