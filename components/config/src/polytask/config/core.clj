@@ -32,20 +32,18 @@
   "Given an environment keyword, return a map of the environment file contents
   stored in an edn file."
   [env]
-  (let [config-file (str "./config/" (name env) ".env.edn")
+  (let [config-file (str "config/" (name env) ".env.edn")
         file (io/resource config-file)]
     (if file
       (parse-env-file file)
-      (throw (ex-info (str "Could not find config file: " config-file) {})))))
+      (throw (Exception. (str "Could not find config file: " config-file))))))
 
 (defn- fetch-from-secrets-manager
   "Fetches secrets from AWS Secrets Manager or HashiCorp Vault.
   This is just a placeholder function"
   []
   ;; Simulate fetching secrets
-  {"DATABASE_URL" "postgres://user:password@secrets-db:5432/polytask"
-   "API_KEY" "super-secret-key"
-   "SECRET_FEATURE_FLAG" "true"})
+  {})
 
 (defn load-config
   "Load the configuration for the current environment based on the config source."
