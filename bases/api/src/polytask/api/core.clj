@@ -4,10 +4,10 @@
             [muuntaja.core :as m]
             [reitit.ring :as ring]
             [reitit.ring.middleware.muuntaja :as muuntaja]
-            [ring.adapter.jetty :as jetty]
             [polytask.config.interface :as c]
             [polytask.logger.interface :as l]
-            [polytask.task-repository.interface :as task-repo]))
+            [polytask.task-repository.interface :as task-repo]
+            [polytask.server.interface :as server]))
 
 (defn routes [{:keys [db]}]
   (ring/ring-handler
@@ -61,20 +61,17 @@
 
 (defn- start-server [deps]
   (let [config (c/get-config :server)]
-    (l/info (str "Starting server on " (or (:host config) "localhost") ":" (:port config)))
-    (jetty/run-jetty (routes deps) config)))
+    (server/start (routes deps) config)))
 
 (defn- stop-server [server]
-  (l/info "Stopping server")
-  (.stop server))
+  (server/stop server))
 
-(defmethod ig/init-key :polytask.api/ring [_ context]
+(defmethod ig/init-key :polytask.api/jetty [_ context]
   (let [server (start-server context)]
     {:server server}))
 
-(defmethod ig/halt-key! :polytask.api/ring [_ {:keys [server]}]
-  (when server
-    (stop-server server)))
+(defmethod ig/halt-key! :polytask.api/jetty [_ {:keys [server]}]
+  (stop-server server))
 
 (defn -main
   []

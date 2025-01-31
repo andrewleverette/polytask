@@ -7,8 +7,8 @@
                                poly/logger {:local/root "components/logger"}
                                poly/in-memory-database {:local/root "components/in_memory_database"}
                                poly/in-memory-task-repository {:local/root "components/in_memory_task_repository"}
-                               poly/base {:local/root "bases/api"}}}
-
+                               poly/jetty-server {:local/root "components/jetty_server"}
+                               poly/api {:local/root "bases/api"}}}
             :test {:extra-paths []}
 
             :poly {:main-opts ["-m" "polylith.clj.core.poly-cli.core"]
