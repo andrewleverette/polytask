@@ -4,9 +4,10 @@
                   :extra-deps {org.clojure/clojure {:mvn/version "1.11.1"}
                                integrant/integrant {:mvn/version "0.13.1"}
                                poly/config {:local/root "components/config"}
-                               poly/logger {:local/root "components/logger"}
+                               poly/http-client {:local/root "components/http_client"}
                                poly/in-memory-database {:local/root "components/in_memory_database"}
                                poly/in-memory-task-repository {:local/root "components/in_memory_task_repository"}
+                               poly/logger {:local/root "components/logger"}
                                poly/jetty-server {:local/root "components/jetty_server"}
                                poly/api {:local/root "bases/api"}}}
             :test {:extra-paths []}
