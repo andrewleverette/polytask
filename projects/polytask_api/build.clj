@@ -8,7 +8,7 @@
 (defn- uber-opts [opts]
   (assoc opts
          :main main
-         :uber-file "target/polytask-api-standalone.jar"
+         :uber-file "target/polytask_api_standalone.jar"
          :basis (b/create-basis)
          :class-dir class-dir
          :src-dirs ["src"]
