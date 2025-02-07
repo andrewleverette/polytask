@@ -1,4 +1,6 @@
 {:paths ["src" "resources"]
- :deps {cjohansen/courier {:mvn/version "2024.03.15"}}
+ :deps {org.clojure/clojurescript {:mvn/version "1.11.54"}
+        cjohansen/courier {:mvn/version "2024.03.15"}
+        metosin/jsonista {:mvn/version "0.3.13"}}
  :aliases {:test {:extra-paths ["test"]
                   :extra-deps {}}}}

@@ -12,12 +12,21 @@
   (ig/halt! system))
 
 (http-client/request
- {:req {:method :get
-        :url "http://localhost:8000/tasks"}})
+ {:method :get
+  :url "http://localhost:8000/tasks"})
 
 (http-client/request
- {:req {:method :post
-        :url "http://localhost:8000/tasks"
-        :body "{\"title\": \"Work on PolyTask\"
-                 \"description\" \"Currently need to build an API Client that supports CLJ and CLJS\"
-                 \"status\" \"not started\"}"}})
+ {:method :get
+  :url "http://localhost:8000/tasks/5f811e2e-05cc-4cf6-bd55-adf51e5090a3"})
+
+(http-client/request
+ {:method :put
+  :url "http://localhost:8000/tasks/5f811e2e-05cc-4cf6-bd55-adf51e5090a3"
+  :body {:status "in-progress"}})
+
+(http-client/request
+ {:method :post
+  :url "http://localhost:8000/tasks"
+  :body {:title "Study Clojure for 1 hour"
+         :description "Using the curring current learn clojure goals and milestones, study Clojure for 1 hour."
+         :status "not-started"}})
