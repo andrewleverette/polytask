@@ -37,7 +37,8 @@
                   {:status 200 :body task})
                 (do
                   (l/warn "Task not found" {:id id})
-                  {:status 404 :body {:error "Task not found"}})))
+                  {:status 404 :body {:message "Task not found"
+                                      :data {:id id}}})))
        :put (fn [{:keys [path-params body-params]}]
               (l/info "Handling PUT /tasks/:id")
               (if-let [task (task-repo/update-task! db (:id path-params) body-params)]
@@ -46,7 +47,7 @@
                   {:status 200 :body task})
                 (do
                   (l/warn "Task not found" {:id (:id path-params)})
-                  {:status 404 :body {:error "Task not found"}})))
+                  {:status 404 :body {:message "Task not found"}})))
        :delete (fn [{{:keys [id]} :path-params}]
                  (l/info "Handling DELETE /tasks/:id")
                  (if (task-repo/delete-task! db id)
@@ -55,7 +56,8 @@
                      {:status 204})
                    (do
                      (l/warn "Task not found" {:id id})
-                     {:status 404 :body {:error "Task not found"}})))}]]
+                     {:status 404 :body {:message "Task not found"
+                                         :data {:id id}}})))}]]
     {:data {:muuntaja m/instance
             :middleware [muuntaja/format-middleware]}})))
 
