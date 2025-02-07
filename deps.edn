@@ -9,8 +9,13 @@
                                poly/in-memory-task-repository {:local/root "components/in_memory_task_repository"}
                                poly/logger {:local/root "components/logger"}
                                poly/jetty-server {:local/root "components/jetty_server"}
-                               poly/api {:local/root "bases/api"}}}
+                               poly/api {:local/root "bases/api"}
+                               poly/cli {:local/root "bases/cli"}}}
             :test {:extra-paths []}
 
             :poly {:main-opts ["-m" "polylith.clj.core.poly-cli.core"]
-                   :extra-deps {polylith/clj-poly {:mvn/version "0.2.21"}}}}}
+                   :extra-deps {polylith/clj-poly {:mvn/version "0.2.21"}}}
+
+            :build {:replace-deps {io.github.clojure/tools.build {:mvn/version "0.10.0"}
+                                   org.clojure/tools.deps {:mvn/version "0.16.1281"}}
+                    :ns-default build}}}
