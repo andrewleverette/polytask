@@ -1,0 +1,7 @@
+{:deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        poly/cli {:local/root "../../bases/cli"}}
+
+ :aliases {:test {:extra-paths []
+                  :extra-deps  {}}
+
+           :uberjar {:main polytask.cli.core}}}
