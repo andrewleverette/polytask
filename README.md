@@ -1,13 +1,15 @@
-<img src="logo.png" width="30%" alt="Polylith" id="logo">
+# PolyTask - Simple Personal Task Management
 
-The Polylith documentation can be found here:
+## Overview
 
-- The [high-level documentation](https://polylith.gitbook.io/polylith)
-- The [poly tool documentation](https://cljdoc.org/d/polylith/clj-poly/CURRENT)
-- The [RealWorld example app documentation](https://github.com/furkan3ayraktar/clojure-polylith-realworld-example-app)
+PolyTask is a minimalist, mobile-friendly web application designed for personal task management. Built with Clojure and following the Polylith architecture, PolyTask emphasizes modularity, maintainability, and a clean user experience.
 
-You can also get in touch with the Polylith Team on [Slack](https://clojurians.slack.com/archives/C013B7MQHJQ).
+---
 
-<h1>polytask</h1>
+## Key Features
 
-<p>Add your workspace documentation here...</p>
+- **Task Management:** Create, read, update, and delete (CRUD) operations for tasks.
+- **Task Status:** Clear differentiation between completed and pending tasks.
+- **Task Filtering:** Filter tasks by completion status for efficient task management.
+- **Responsive Design:** Mobile-first design for accessibility across various devices.
+- **Polylith Architecture:** Modular codebase for enhanced maintainability and scalability.
