@@ -41,3 +41,4 @@ projects/**/pom.xml
 
 # Config files
 .env
+env/*.edn
