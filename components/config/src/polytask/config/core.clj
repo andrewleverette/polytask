@@ -23,7 +23,7 @@
   The environment is determined by the `POLYTASK_ENV` environment variable,
   defaulting to 'local' if the variable is not set."
   (:require
-   [clojure.io :as io]
+   [clojure.java.io :as io]
    [integrant.core :as ig]))
 
 (defn- get-env
